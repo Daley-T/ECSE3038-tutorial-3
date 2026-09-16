@@ -33,3 +33,8 @@ def hottest(array):
     print("\nHottest Temp Dictionary:\n",device[index])
 
 hottest(device)
+
+@app.get("/devices")
+async def get_devices():
+    return device
+    
