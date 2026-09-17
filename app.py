@@ -21,7 +21,6 @@ def avg_temp(array):
     print("\nAverage Temp. = " ,avg)
     return avg 
 
-
 def hottest(array):
     hotter:float = 0.0
     index:int = 0
@@ -33,6 +32,13 @@ def hottest(array):
     hottest = devices[index]
     return hottest
 
+def online(array):
+    online = {}
+    for i in range(len(array)):
+        if (array[i]["online"] == True):
+            online.update({array[i]["name"]:array[i]})
+    return online
+
 @app.get("/devices")
 async def get_devices():
     return devices
@@ -40,4 +46,10 @@ async def get_devices():
 @app.get("/devices/hottest")
 async def get_hottestdevice():
     return hottest(devices)
+
+@app.get("/devices/online")
+async def get_onlinedevice():
+    return online(devices)
+
+
     
