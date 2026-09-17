@@ -10,31 +10,34 @@ readings = [
     {"name": "patio",      "room": "outside", "temp": 29.8, "online": True},
 ]
 
-device = readings.copy()
+devices = readings.copy()
 
 def avg_temp(array):
     avg:float = 0.0
     new_sum:float = 0.0
     for i in range(len(array)):
-        new_sum = new_sum + device[i]["temp"]
+        new_sum = new_sum + devices[i]["temp"]
         avg = round((new_sum / (len(array))),2)
     print("\nAverage Temp. = " ,avg)
-
-avg_temp(device)
+    return avg 
 
 
 def hottest(array):
     hotter:float = 0.0
     index:int = 0
     for i in range(len(array)):
-        if device[i]["temp"] > hotter:
-            hotter = device[i]["temp"]
+        if devices[i]["temp"] > hotter:
+            hotter = devices[i]["temp"]
             index = i
-    print("\nHottest Temp Dictionary:\n",device[index])
-
-hottest(device)
+    print("\nHottest Temp Dictionary:\n",)
+    hottest = devices[index]
+    return hottest
 
 @app.get("/devices")
 async def get_devices():
-    return device
+    return devices
+
+@app.get("/devices/hottest")
+async def get_hottestdevice():
+    return hottest(devices)
     
